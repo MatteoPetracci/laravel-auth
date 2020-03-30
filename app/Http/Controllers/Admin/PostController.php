@@ -5,10 +5,21 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
 {
+    private $validation;
+    public function __construct()
+    {
+        $this->validation = [
+            'image'=>'required|string',
+            'title'=>'required|string|max:255',
+            'body'=>'required|string',
+        ];
+    } 
+    
     /**
      * Display a listing of the resource.
      *
@@ -42,8 +53,22 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // dd('store');
-        $user = Auth::user();
-        dd($user);
+       $userId = Auth::user()->id;
+       $idUser =  $userId;
+       $request->validate($this->validation);
+       $data = $request->all();
+    
+       $newpost = new Post;
+       $newpost->fill($data);
+       $newpost->user_id = $idUser;
+       $newpost->slug = Str::slug($newpost->title, '/');
+       $save = $newpost->save();
+        if (!$save) {
+            return redirect()->back();
+        }
+        // dd($user);
+        // dd($idUser);
+        return redirect()->route('admin.posts.show', $newpost->slug);
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<a class="btn btn-success" href="{{route('admin.posts.create')}}">CREATE NEW POST</a>
 <table class="table">
     <thead>
         <th>ID</th>
@@ -21,7 +21,7 @@
             <td>{{$post->created_at}}</td>
             <td>{{$post->updated_at}}</td>
             <td><a href="{{route('admin.posts.show', $post->slug)}}">SHOW</a></td>
-            <td>EDIT</td>
+            <td><a href="{{route('admin.posts.edit', $post->slug)}}">EDIT</a></td>
             <td>
                <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
                    @csrf
@@ -33,5 +33,6 @@
         @endforeach
     </tbody>
 </table>
+
 
 @endsection

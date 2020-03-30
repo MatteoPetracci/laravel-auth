@@ -50,9 +50,14 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug)
     {
-        //
+        // dd($slug);
+        // Prendo il Post dove lo slug è uguale alla variabile $slug
+        $post = Post::where('slug', $slug)->first();
+        // dd($post);
+        return view('admin.posts.show', compact('post'));
+
     }
 
     /**

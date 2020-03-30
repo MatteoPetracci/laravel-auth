@@ -15,6 +15,13 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            // Collegamento con User oneToMany
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('image');
+            $table->string('title');
+            $table->longText('body');
+            $table->string('slug');
             $table->timestamps();
         });
     }

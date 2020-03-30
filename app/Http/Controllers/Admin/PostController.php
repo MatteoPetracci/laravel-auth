@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -14,7 +16,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        dd('ciao');
+        // dd('ciao');
+        // Salvo in una variabile tutti i post
+        // $posts = Post::all();
+        $posts = Post::where('user_id', Auth::id())->get();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**

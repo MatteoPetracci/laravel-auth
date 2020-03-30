@@ -22,7 +22,13 @@
             <td>{{$post->updated_at}}</td>
             <td><a href="{{route('admin.posts.show', $post->slug)}}">SHOW</a></td>
             <td>EDIT</td>
-            <td>DELETE</td>
+            <td>
+               <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
+                   @csrf
+                   @method('DELETE')
+                    <button type="submit">DELETE</button>
+                </form> 
+            </td>
         </tr>
         @endforeach
     </tbody>

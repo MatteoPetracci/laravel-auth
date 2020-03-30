@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 
 class PostController extends Controller
@@ -109,7 +110,24 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        
+        // dd($request->all());
+        $userId = Auth::user()->id;
+        $idUser =  $userId;
+        $request->validate($this->validation);
+        $data = $request->all();
+        
+        $post->fill($data);
+        $post->user_id = $idUser;
+        $post->slug = Str::slug($post->title, '/');
+        $post->updated_at = Carbon::now();
+        $save = $post->update();
+        if (!$save) {
+            return redirect()->back();
+        }
+        // dd($user);
+        // dd($idUser);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**

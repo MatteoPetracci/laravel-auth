@@ -12,11 +12,24 @@
         <div class="row">
             <div class="col-12">
                 @foreach ($onePost->comments as $comment)
-                    <h3>{{$comment->title}}</h3>
                     <p>{{$comment->name}}</p>
                     <p style="border:2px solid black">{{$comment->body}}</p>
                 @endforeach
             </div>
         </div>
+        {{-- <div class="row">
+            <div class="col-12">
+                <form action="" method="post">
+                    @csrf
+
+
+
+
+
+                    @method('POST')
+                </form>
+                
+            </div>
+        </div> --}}
     </div>
 @endsection

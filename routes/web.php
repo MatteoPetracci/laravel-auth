@@ -20,6 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/posts', 'PostController@index')->name('posts.index');
+// Creo una rotta al post specifico grazie a show
+Route::get('/posts/{slug}', 'PostController@show')->name('posts.show');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

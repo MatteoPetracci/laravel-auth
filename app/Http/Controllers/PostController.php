@@ -12,4 +12,13 @@ class PostController extends Controller
         $posts = Post::all();
         return view('guest.posts.index', compact('posts'));
     }
+    public function show($slug) 
+    {
+        $onePost = Post::where('slug', $slug)->first();
+        if(!empty($onePost)) {
+            return view('guest.posts.show', compact('onePost'));
+        } else {
+            abort('404');
+        }
+    }
 }

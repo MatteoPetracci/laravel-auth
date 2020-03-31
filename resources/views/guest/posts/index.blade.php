@@ -8,6 +8,7 @@
                     <h3>{{$post->title}}</h3>
                     <p>{{$post->user->name}}</p>
                     <p>{{$post->body}}</p>
+                <a class="btn btn-success" href="{{route('posts.show', $post->slug)}}">Clicca qui</a>
                 @endforeach
             </div>
         </div>

@@ -22,6 +22,10 @@ Auth::routes();
 Route::get('/posts', 'PostController@index')->name('posts.index');
 // Creo una rotta al post specifico grazie a show
 Route::get('/posts/{slug}', 'PostController@show')->name('posts.show');
+// Creo una rotta per comment con la funzione store e controller comment
+
+Route::post('/comments/create', 'CommentController@store')->name('comments.store');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

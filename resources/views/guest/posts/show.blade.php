@@ -21,8 +21,8 @@
         </div>
         <div class="row" style="margin-top:30px">
             <div class="col-12">
-                <h4>Insert a comment</h4>
-                <form action="" method="post">
+                <h4>Enter a comment</h4>
+                <form action="{{route('comments.store')}}" method="post">
                     @csrf
                     <label for="name">Name User</label>
                     <input type="text" name="name" id=""> <br>
@@ -30,10 +30,10 @@
                     <textarea name="body" id="" cols="30" rows="10"></textarea><br>
                     <label for="email">Email User</label>
                     <input type="text" name="email" id=""><br>
+                    <input type="hidden" name="post_id" value="{{$onePost->id}}">
                     <button class="btn btn-primary" type="submit">Send</button>
                     @method('POST')
                 </form>
-                
             </div>
         </div>
     </div>

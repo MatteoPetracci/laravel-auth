@@ -10,7 +10,6 @@
             <input type="text" name="title" id="title"> <br>
             <label for="body">Body</label> <br>
             <textarea  name="body" id="body" cols="25" rows="15"></textarea><br>
-            <button class='btn btn-primary' type="submit">Save</button>
         </div>
         
         <input type="hidden" name="user_id" value='{{Auth::id()}}'>
@@ -19,6 +18,7 @@
             <h4 style="display:inline-block">{{$tag->name}}</h4>
             <input type="checkbox" name="tag[]" value="{{$tag->id}}" id="">
         @endforeach
+        <button class='btn btn-primary' type="submit">Save</button>
         
         @method('POST')
 

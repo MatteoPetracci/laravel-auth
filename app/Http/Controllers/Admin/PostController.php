@@ -56,7 +56,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('store');
+    //    dd($request->all());
        $userId = Auth::user()->id;
        $idUser =  $userId;
        $request->validate($this->validation);
@@ -67,9 +67,13 @@ class PostController extends Controller
        $newpost->user_id = $idUser;
        $newpost->slug = Str::slug($newpost->title, '/');
        $save = $newpost->save();
+
         if (!$save) {
             return redirect()->back();
         }
+        $newtags = $data['tag'];
+        $newpost->tags()->attach($newtags);
+        dd($newpost);
         // dd($user);
         // dd($idUser);
         return redirect()->route('admin.posts.show', $newpost->slug);

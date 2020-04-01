@@ -104,7 +104,14 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::all();
+        $data = [
+            'tags' => $tags,
+            'post' => $post
+        ];
+        // return view('admin.posts.edit', compact('post'));
+         return view('admin.posts.edit', $data);
+
 
     }
 
@@ -132,6 +139,8 @@ class PostController extends Controller
         if (!$save) {
             return redirect()->back();
         }
+        $newtags = $data['tag'];
+        $post->tags()->sync($newtags);
         // dd($user);
         // dd($idUser);
         return redirect()->route('admin.posts.show', $post->slug);

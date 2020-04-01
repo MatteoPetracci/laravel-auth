@@ -14,7 +14,11 @@
         </div>
         
         <input type="hidden" name="user_id" value='{{Auth::id()}}'>
-        
+        <label for="tags">All Tags</label>
+        @foreach ($tags as $tag)
+            <h4 style="display:inline-block">{{$tag->name}}</h4>
+            <input type="checkbox" name="tag[]" value="{{$tag->id}}" id="">
+        @endforeach
         
         @method('POST')
 

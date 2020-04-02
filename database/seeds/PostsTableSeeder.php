@@ -23,7 +23,8 @@ class PostsTableSeeder extends Seeder
             $newPost->image = "https://picsum.photos/id/" . rand(1,100) . '/300/200';
             $newPost->title = $faker->text(10);
             $newPost->body = $faker->paragraph();
-            $newPost->slug = Str::slug($newPost->title, '-');
+            $newPost->path_img = $faker->imageUrl(640,480);
+            $newPost->slug = Str::slug($newPost->title, '/');
             $newPost->save();
         }
     }

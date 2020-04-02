@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('body');
             $table->string('slug');
+            $table->text('path_img')->nullable();
             $table->timestamps();
         });
     }

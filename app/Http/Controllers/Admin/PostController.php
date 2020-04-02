@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -61,11 +62,12 @@ class PostController extends Controller
        $idUser =  $userId;
        $request->validate($this->validation);
        $data = $request->all();
-    
+       $pathImg = Storage::disk('public')->put('images', $data['path_img']);
        $newpost = new Post;
        $newpost->fill($data);
        $newpost->user_id = $idUser;
        $newpost->slug = Str::slug($newpost->title, '/');
+       $newpost->path_img = $pathImg;
        $save = $newpost->save();
 
         if (!$save) {
